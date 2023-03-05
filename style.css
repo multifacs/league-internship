@@ -102,3 +102,92 @@
     overflow: hidden;
     vertical-align: middle;
 }
+
+@media only screen and (min-width: 320px) {
+    .main-grid {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 473/2448fr
+                            274/2448fr
+                            473/2448fr
+                            247/2448fr
+                            288/2448fr
+                            185/2448fr
+                            247/2448fr;
+        grid-template-areas:
+            "title title"
+            "text text"
+            "woman-1 woman-1"
+            "mug brown"
+            "woman-2 woman-3"
+            "doors red"
+            "doors man-1"
+            ;
+    }
+
+    .title-block__text {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14vw;
+        line-height: 110%;
+        width: 72%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .main-grid {
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 35fr 16fr 13fr 18fr 18fr;
+        grid-template-rows: 40fr 26fr 34fr;
+        grid-template-areas:
+            "title woman-1 woman-1 woman-2 woman-3"
+            "title woman-1 woman-1 doors red"
+            "text mug brown doors man-1"
+            ;
+    }
+
+    .title-block__text {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 110%;
+        width: 72%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .title-block__text {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 110%;
+        width: 72%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+
+    .title-block__text {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 64px;
+        line-height: 110%;
+        width: 72%;
+    }
+
+}
+@media only screen and (min-width: 1536px) {
+    .title-block__text {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 64px;
+        line-height: 110%;
+        width: 60%;
+    }
+}
