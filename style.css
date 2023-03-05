@@ -109,13 +109,13 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 473/2448fr
-                            274/2448fr
-                            473/2448fr
-                            247/2448fr
-                            288/2448fr
-                            185/2448fr
-                            247/2448fr;
+        grid-template-rows: 67vh
+                            33vh
+                            67vh
+                            33vh
+                            34vh
+                            20vh
+                            46vh;
         grid-template-areas:
             "title title"
             "text text"
