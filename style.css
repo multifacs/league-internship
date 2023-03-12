@@ -138,15 +138,18 @@
 @media only screen and (min-width: 768px) {
     .main-grid {
         width: 100%;
-        height: 100vh;
+        height: 100%;
         display: grid;
-        grid-template-columns: 35fr 16fr 13fr 18fr 18fr;
-        grid-template-rows: 40fr 26fr 34fr;
+        grid-template-columns: 27fr 23fr 23fr 27fr;
+        grid-template-rows: 33vh 34vh 33vh 33vh 34vh 33vh;
         grid-template-areas:
-            "left-upper center-upper center-upper right-upper-one right-upper-two"
-            "left-upper center-upper center-upper right-lower-one right-lower-two"
-            "left-lower center-lower-one center-lower-two right-lower-one right-lower-three"
-            ;
+        "left-upper left-upper    center-upper        center-upper"
+        "left-upper left-upper    center-upper        center-upper"
+        "left-lower left-lower     center-lower-one    center-lower-two"
+        "right-upper-one right-lower-one right-lower-one right-upper-two"
+        "right-lower-two right-lower-one right-lower-one right-upper-two"
+        "right-lower-two right-lower-one right-lower-one right-lower-three"
+        ;
     }
 
     .main-grid__title {
@@ -155,13 +158,22 @@
 }
 @media only screen and (min-width: 992px) {
     .main-grid__title {
-        font-size: 50px;
+        font-size: 60px;
     }
 }
 @media only screen and (min-width: 1200px) {
 
-    .main-grid__title {
-        font-size: 64px;
+    .main-grid {
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 35fr 16fr 13fr 18fr 18fr;
+        grid-template-rows: 40fr 26fr 34fr;
+        grid-template-areas:
+        "left-upper     center-upper center-upper           right-upper-one right-upper-two"
+        "left-upper     center-upper center-upper           right-lower-one right-lower-two"
+        "left-lower     center-lower-one center-lower-two   right-lower-one right-lower-three"
+        ;
     }
 
 }
@@ -169,4 +181,13 @@
     .main-grid__title {
         width: 60%;
     }
+
+    .main-grid__title {
+        font-size: 64px;
+    }
+}
+
+
+.main-grid__hidden {
+    visibility: hidden;
 }
