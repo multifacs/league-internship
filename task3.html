@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    const bigFunc = async () => {
+        await firstMacro()
+        await secondMacro()
+        await thirdMacro()
+    }
+
+    const firstMacro = () => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                send()
+                changeStyle()
+                resolve("foo")
+            }, 1500)
+        })
+    }
+    const secondMacro = () => {
+        return new Promise(resolve => {
+            const interval = setInterval(() => {
+                const a = receive()
+                test(a)
+                clearInterval(interval)
+                resolve("bar")
+            }, 1500)
+        })
+    }
+    const thirdMacro = async () => {
+        const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+        return new Promise(resolve => {   
+            status(res.status)
+            changeList()
+            resolve("zaza")
+        })
+    }
+
+    const send = () => {
+        console.log("Smth sent")
+    }
+    const changeStyle = () => {
+        const header = document.getElementById("header")
+        header.style.color = "blue"
+    }
+    const receive = () => {
+        console.log("Smth received")
+        return "Result"
+    }
+    const test = (a) => {
+        console.log(`Test test test ${a}`)
+    }
+
+    const status = (status) => {
+        console.log(`status: ${status}`)
+    }
+
+    const changeList = () => {
+        const list = document.getElementById("list")
+        const li = document.createElement('li')
+        li.innerHTML = 123
+        list.appendChild(li)
+    }
+
+
+
+    bigFunc()
+</script>
+
+<body>
+    <h1 id="header">Hi!</h1>
+    <ul id="list">
+        <li>
+            One
+        </li>
+        <li>
+            Two
+        </li>
+        <li>
+            Three
+        </li>
+    </ul>
+</body>
+
+<style>
+
+</style>
+
+</html>
