@@ -6,12 +6,19 @@ interface Task {
   id?: number;
 }
 
+const host = 'https://intership-liga.ru/tasks/';
+const headers = {
+  'accept': 'application/json',
+  'Content-Type': 'application/json',
+};
+
 const getTasks = async (isImportant?: boolean, nameLike?: string, isCompleted?: boolean): Promise<Task[]> => {
-  const params: string[] = [];
-  if (isImportant != undefined) params.push(`isImportant=${isImportant}`);
-  if (nameLike) params.push(`nameLike=${nameLike}`);
-  if (isCompleted != undefined) params.push(`isCompleted=${isCompleted}`);
-  const url = 'https://intership-liga.ru/tasks' + (params.length != 0 ? '?' + params.join('&') : '');
+  const params = new URLSearchParams();
+  if (isImportant != undefined) params.append('isImportant', `${isImportant}`);
+  if (nameLike) params.append('nameLike', `${nameLike}`);
+  if (isCompleted != undefined) params.append('isCompleted', `${isCompleted}`);
+
+  const url = host + '?' + params.toString();
   console.log(url);
   const response = await fetch(url, {
     method: 'GET',
@@ -23,15 +30,12 @@ const getTasks = async (isImportant?: boolean, nameLike?: string, isCompleted?: 
 };
 
 const postTask = async (body: Task): Promise<Task> => {
-  const url = 'https://intership-liga.ru/tasks';
+  const url = host;
   console.log(url);
-  const response = await fetch('https://intership-liga.ru/tasks', {
+  const response = await fetch(host, {
     method: 'POST',
     body: JSON.stringify(body),
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -40,7 +44,7 @@ const postTask = async (body: Task): Promise<Task> => {
 };
 
 const getTaskById = async (id: number | string): Promise<Task[]> => {
-  const url = 'https://intership-liga.ru/tasks/' + id;
+  const url = host + id;
   console.log(url);
   const response = await fetch(url, {
     method: 'GET',
@@ -52,15 +56,12 @@ const getTaskById = async (id: number | string): Promise<Task[]> => {
 };
 
 const patchTaskById = async (id: number | string, body: Task): Promise<Task> => {
-  const url = 'https://intership-liga.ru/tasks/' + id;
+  const url = host + id;
   console.log(url);
   const response = await fetch(url, {
     method: 'PATCH',
     body: JSON.stringify(body),
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -69,14 +70,11 @@ const patchTaskById = async (id: number | string, body: Task): Promise<Task> => 
 };
 
 const deleteTaskById = async (id: number | string): Promise<void> => {
-  const url = 'https://intership-liga.ru/tasks/' + id;
+  const url = host + id;
   console.log(url);
   const response = await fetch(url, {
     method: 'DELETE',
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
   if (!response.ok) {
     throw new Error(response.statusText);
