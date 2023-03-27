@@ -1,71 +1,3 @@
-// const getTaskId = async (id) => {
-//   console.log('GET /tasks/{id}');
-
-//   try {
-//     const res = await (
-//       await fetch('https://intership-liga.ru/tasks/' + id, {
-//         method: 'GET',
-//         headers: {
-//           'accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//       })
-//     ).json();
-//     console.log('Fetch loaded!');
-//     console.log(res);
-//   } catch (err) {
-//     console.log('Fetch error!');
-//     console.log('Status:', err);
-//   }
-// };
-
-// const patchTaskId = async (id) => {
-//   console.log('PATCH /tasks/{id}');
-
-//   try {
-//     const res = await (
-//       await fetch('https://intership-liga.ru/tasks/' + id, {
-//         method: 'PATCH',
-//         body: JSON.stringify({
-//           'name': 'Nick 123',
-//           'info': 'some info',
-//           'isImportant': true,
-//         }),
-//         headers: {
-//           'accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//       })
-//     ).json();
-//     console.log('Fetch loaded!');
-//     console.log(res);
-//   } catch (err) {
-//     console.log('Fetch error!');
-//     console.log('Status:', err);
-//   }
-// };
-
-// const deleteTaskId = async (id) => {
-//   console.log('DELETE /tasks/{id}');
-
-//   try {
-//     const res = await (
-//       await fetch('https://intership-liga.ru/tasks/' + (id + 1), {
-//         method: 'DELETE',
-//         headers: {
-//           'accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//       })
-//     ).json();
-//     console.log('Fetch loaded!');
-//     console.log(res);
-//   } catch (err) {
-//     console.log('Fetch error!');
-//     console.log('Status:', err);
-//   }
-// };
-
 interface Task {
   name: string;
   info?: string;
@@ -107,8 +39,52 @@ const postTask = async (body: Task): Promise<Task> => {
   return await response.json();
 };
 
+const getTaskById = async (id: number | string): Promise<Task[]> => {
+  const url = 'https://intership-liga.ru/tasks/' + id;
+  console.log(url);
+  const response = await fetch(url, {
+    method: 'GET',
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return await response.json();
+};
+
+const patchTaskById = async (id: number | string, body: Task): Promise<Task> => {
+  const url = 'https://intership-liga.ru/tasks/' + id;
+  console.log(url);
+  const response = await fetch(url, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return await response.json();
+};
+
+const deleteTaskById = async (id: number | string): Promise<void> => {
+  const url = 'https://intership-liga.ru/tasks/' + id;
+  console.log(url);
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+};
+
 const runAll = async (): Promise<void> => {
-  console.log('GET /tasks');
+  console.log('GET /tasks/*params*');
   try {
     const res = await getTasks(false, undefined, true);
     console.log('Fetch loaded!');
@@ -119,7 +95,8 @@ const runAll = async (): Promise<void> => {
   }
   console.log('------------------');
 
-  let resultId: number;
+  console.log('POST /tasks');
+  let resultId = 0;
   try {
     const result: Task = await postTask({
       name: 'Nick',
@@ -136,12 +113,39 @@ const runAll = async (): Promise<void> => {
   }
   console.log('------------------');
 
-  //   await getTaskId(resultId);
-  //   console.log('------------------');
+  console.log('GET /tasks/{id}');
+  try {
+    const res = await getTaskById(resultId);
+    console.log('Fetch loaded!');
+    console.log(res);
+  } catch (err) {
+    console.log('Fetch error!');
+    console.log('Status:', err);
+  }
+  console.log('------------------');
 
-  //   await patchTaskId(resultId);
-  //   console.log('------------------');
+  console.log('PATCH /tasks/{id}');
+  try {
+    const res = await patchTaskById(resultId, {
+      name: 'Nick 123',
+      info: 'some info',
+      isImportant: true,
+    });
+    console.log('Fetch loaded!');
+    console.log(res);
+  } catch (err) {
+    console.log('Fetch error!');
+    console.log('Status:', err);
+  }
+  console.log('------------------');
 
-  //   await deleteTaskId(resultId);
+  console.log('DELETE /tasks/{id}');
+  try {
+    await deleteTaskById(resultId);
+    console.log('Fetch loaded!');
+  } catch (err) {
+    console.log('Fetch error!');
+    console.log('Status:', err);
+  }
 };
 runAll();
