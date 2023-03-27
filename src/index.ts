@@ -68,10 +68,10 @@
 
 interface Task {
   name: string;
-  info: string;
-  isImportant: boolean;
-  id: number;
-  isCompleted: boolean;
+  info?: string;
+  isImportant?: boolean;
+  isCompleted?: boolean;
+  id?: number;
 }
 
 const getTasks = async (isImportant?: boolean, nameLike?: string, isCompleted?: boolean): Promise<Task[]> => {
@@ -84,17 +84,13 @@ const getTasks = async (isImportant?: boolean, nameLike?: string, isCompleted?: 
   const response = await fetch(url, {
     method: 'GET',
   });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
   return await response.json();
 };
 
-interface PostBody {
-  name: string;
-  info: string;
-  isImportant?: boolean;
-  isCompleted?: boolean;
-}
-
-const postTask = async (body: PostBody): Promise<Task> => {
+const postTask = async (body: Task): Promise<Task> => {
   const url = 'https://intership-liga.ru/tasks';
   console.log(url);
   const response = await fetch('https://intership-liga.ru/tasks', {
@@ -105,6 +101,9 @@ const postTask = async (body: PostBody): Promise<Task> => {
       'Content-Type': 'application/json',
     },
   });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
   return await response.json();
 };
 
@@ -122,14 +121,15 @@ const runAll = async (): Promise<void> => {
 
   let resultId: number;
   try {
-    resultId = (
-      await postTask({
-        name: 'Nick',
-        info: '123',
-      })
-    ).id;
+    const result: Task = await postTask({
+      name: 'Nick',
+      info: '123',
+    });
     console.log('Fetch loaded!');
-    console.log(resultId);
+    if (result.id) {
+      resultId = result.id;
+      console.log(resultId);
+    }
   } catch (err) {
     console.log('Fetch error!');
     console.log('Status:', err);
