@@ -9,7 +9,8 @@
     }
   },
   "scripts": {
-    "build": "eslint src/**/*.ts && tsc -w"
+    "build": "eslint src/**/*.ts && tsc --project tsconfig.json",
+    "watch": "eslint src/**/*.ts && tsc -w"
   },
   "author": "",
   "license": "ISC",
