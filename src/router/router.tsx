@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { TasksPage } from 'pages/index';
-import { AddPage } from 'pages/index';
-import { EditPage } from 'pages/index';
+import { TasksPage, AddPage, EditPage } from 'pages/index';
 
 import { PATH_LIST } from 'constants/paths';
 
