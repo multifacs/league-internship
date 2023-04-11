@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useCallback } from 'react';
 import { observer } from 'mobx-react';
 import { Controller, useForm } from 'react-hook-form';
 import { StatusFilter } from '../StatusFilter';
@@ -14,12 +14,12 @@ function SearchFormProto() {
     defaultValues: DEFAULT_SEARCH_FORM,
   });
 
-  const onSubmit = (evt: MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = useCallback((evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     handleSubmit((form) => {
       updateTasks(form);
     })();
-  };
+  }, []);
 
   const onTasksTypeChange = (tasksType: FiltersType) => setValue('filterType', tasksType);
   const onSearchInputChange = (searchText: string) => setValue('searchValue', searchText);

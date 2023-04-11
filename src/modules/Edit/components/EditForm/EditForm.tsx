@@ -1,18 +1,11 @@
 import React, { ChangeEvent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { AddStoreInstance } from 'modules/Add/store';
-import './AddForm.css';
+import { EditStoreInstance } from 'modules/Edit/store';
+import './EditForm.css';
 import { AddEntity } from 'domains/Form.entity';
-
-const defaultValues: AddEntity = {
-  name: '',
-  info: '',
-  isImportant: false,
-  isDone: false,
-};
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -21,7 +14,18 @@ const validationSchema = Yup.object().shape({
   isDone: Yup.bool(),
 });
 
-export const AddForm = () => {
+export const EditForm = () => {
+  const { taskId } = useParams();
+
+  console.log(taskId); // 👉️ {userId: '4200'}
+
+  const defaultValues: AddEntity = {
+    name: '',
+    info: '',
+    isImportant: false,
+    isDone: false,
+  };
+
   const { handleSubmit, reset, control, setValue } = useForm<AddEntity>({
     defaultValues: defaultValues,
     resolver: yupResolver(validationSchema),
@@ -29,7 +33,7 @@ export const AddForm = () => {
 
   const onSubmit = (data: AddEntity) => {
     console.log(data);
-    AddStoreInstance.addTask(data);
+    EditStoreInstance.editTask(taskId as string, data);
   };
 
   const onNameChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => setValue('name', evt.target.value), []);
