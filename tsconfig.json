@@ -25,11 +25,6 @@
     "strictNullChecks": true,
     "target": "es2017",
     "types": [
-      "@testing-library/cypress",
-      "@testing-library/jest-dom",
-      "@testing-library/react",
-      "cypress",
-      "jest",
       "node",
       "webpack-env",
       "reflect-metadata"

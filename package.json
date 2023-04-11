@@ -15,7 +15,8 @@
     "lint:styles": "stylelint ./src/**/*.css",
     "fix:styles": "stylelint --fix ./src/**/*.css",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
-    "fix:ts": "eslint src/**/*.{ts,tsx} --quiet --fix"
+    "fix:ts": "eslint src/**/*.{ts,tsx} --quiet --fix",
+    "swagger-types": "npx openapi-typescript http://ovz1.j50031265.px7zm.vps.myjino.ru/swagger.json --output src/http/model/todo.swagger.ts && eslint src/http/model/todo.swagger.ts --fix --no-ignore"
   },
   "author": "",
   "license": "ISC",
@@ -114,7 +115,7 @@
     "typescript": "4.7.3",
     "web-vitals": "2.1.4",
     "webpack": "5.73.0",
-    "webpack-cli": "4.9.2",
+    "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.9.2",
     "webpack-merge": "5.8.0"
   },
@@ -125,6 +126,7 @@
     "@mui/x-data-grid": "5.17.7",
     "@mui/x-date-pickers": "5.0.4",
     "axios": "1.1.3",
+    "browser-sync": "^2.29.1",
     "date-fns": "2.29.3",
     "eslint-webpack-plugin": "^3.2.0",
     "mobx": "6.6.2",
