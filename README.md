@@ -1,5 +1,6 @@
-# React todo project
-npm run dev - запустить проект
+# Шелепин Проект Todo
+npm run dev - запустить проект в режиме разработки
+npm run build - собрать проект
 
 ## Пример итогового проекта
 https://todo-liga-internship.vercel.app/
